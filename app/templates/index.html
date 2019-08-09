@@ -1,0 +1,24 @@
+
+{% extends 'base.html'%} 
+{%blocksytles%}
+{{ super() }}
+<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed&display=swap" rel="stylesheet">
+
+{%endblock%}
+{% block content %}
+
+<div class="container-fluid welcome-page">
+    <div class="container-fluid">
+        <div class="row" style="font-family: 'Roboto Condensed', sans-serif;
+        ">
+            <div class="col-md-12 welcome">
+                {% if current_user.is_authenticated%}
+                <a id="start" class="btn btn-info animated infinite flash" href="{{url_for('home.index')}}"> View Pitches</a>
+                {% else %}
+                <a id="start" class="btn btn-info animated infinite flash" href="{{url_for('auth.login')}}">Rafiki Sign In </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

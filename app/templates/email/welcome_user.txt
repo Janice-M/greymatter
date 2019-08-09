@@ -1,0 +1,4 @@
+Hello Rafiki, {{user.username}}
+Welcome to Pitch Tarvern
+We have just seen you have signed up on our application and want to welcome you to the tarvern. Please post your best pitches and enjoy the pitches from the community.
+
