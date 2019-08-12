@@ -103,7 +103,7 @@ class Upvote(db.Model):
 
 
     def add_upvotes(cls,id):
-        upvote_greymatter = Upvote(user = current_user, pitch_id=id)
+        upvote_greymatter = Upvote(user = current_user, greymatter_id=id)
         upvote_greymatter.save_upvotes()
 
     
@@ -113,7 +113,7 @@ class Upvote(db.Model):
         return upvote
 
     @classmethod
-    def get_all_upvotes(cls,pitch_id):
+    def get_all_upvotes(cls,greymatter_id):
         upvotes = Upvote.query.order_by('id').all()
         return upvotes
 
