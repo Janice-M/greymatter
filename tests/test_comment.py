@@ -6,7 +6,7 @@ class TestPitch(unittest.TestCase):
 
     def setUp(self):
         self.new_grematter = Greymatter(greymatter_content = "blog post",)
-        self.new_comment = Comment(comment_content = "comment", pitch=self.new_pitch)
+        self.new_comment = Comment(comment_content = "comment", greymatter=self.new_pitch)
     
     def tearDown(self):
         db.session.delete(self)
