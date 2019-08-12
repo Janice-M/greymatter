@@ -18,7 +18,7 @@ db = SQLAlchemy()
 simple = SimpleMDE()
 mail = Mail()
 moment = Moment()
-photos = UploadSet('photos', IMAGES)
+
 
 def create_app(config_name):
     '''
@@ -40,7 +40,7 @@ def create_app(config_name):
     # Initialising flask extensions
     bootstrap.init_app(app)
     db.init_app(app)
-    configure_uploads(app, photos)
+    
     login_manager.init_app(app)
     mail.init_app(app)
     moment.init_app(app)

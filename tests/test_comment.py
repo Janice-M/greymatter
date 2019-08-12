@@ -5,7 +5,7 @@ from app import db
 class TestPitch(unittest.TestCase):
 
     def setUp(self):
-        self.new_pitch = Pitch(pitch_content = "pitcher", pitch_category='Bizna')
+        self.new_grematter = Greymatter(greymatter_content = "blog post",)
         self.new_comment = Comment(comment_content = "comment", pitch=self.new_pitch)
     
     def tearDown(self):

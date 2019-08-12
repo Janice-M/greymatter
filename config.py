@@ -10,9 +10,9 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    SUBJECT_PREFIX = 'PITCH'
+    SUBJECT_PREFIX = 'GREYMATTER'
     SENDER_EMAIL = 'kokonutkoala@gmail.com'
-    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:grey@localhost/tarvern'
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:grey@localhost/greymatter'
 
 
 
@@ -47,6 +47,6 @@ class DevConfig(Config):
 
 config_options = {
     'development': DevConfig,
-    'production': ProdConfig,
+    
     'test': TestConfig
 }
