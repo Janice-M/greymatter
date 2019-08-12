@@ -5,8 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_simplemde import SimpleMDE
 from flask_mail import Mail
-
-
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+from flask_moment import Moment
 
 # Instances of flask extensions
 # Instance of LoginManger and using its methods
@@ -17,6 +17,8 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 simple = SimpleMDE()
 mail = Mail()
+moment = Moment()
+photos = UploadSet('photos', IMAGES)
 
 def create_app(config_name):
     '''
@@ -38,9 +40,12 @@ def create_app(config_name):
     # Initialising flask extensions
     bootstrap.init_app(app)
     db.init_app(app)
+    configure_uploads(app, photos)
     login_manager.init_app(app)
     mail.init_app(app)
-
+    moment.init_app(app)
+    login_manager.session_protection = 'strong'
+    login_manager.login_view = 'auth.login'
     # Regestering the main blueprint
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
