@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
     pass_secure = db.Column(db.String(255))
-    greymatter = db.relationship('Pitch', backref='user', lazy='dynamic')
+    greymatter = db.relationship('Greymatter', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
@@ -80,7 +80,7 @@ class Comment(db.Model):
     __tablename__='comments'
     
     id = db.Column(db.Integer,primary_key=True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    greymatter_id = db.Column(db.Integer, db.ForeignKey('greymatters.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
     description = db.Column(db.Text)
 
@@ -94,7 +94,7 @@ class Upvote(db.Model):
 
     id = db.Column(db.Integer,primary_key=True)
     upvote = db.Column(db.Integer,default=1)
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    greymatter_id = db.Column(db.Integer,db.ForeignKey('greymatters.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
     def save_upvotes(self):
@@ -103,13 +103,13 @@ class Upvote(db.Model):
 
 
     def add_upvotes(cls,id):
-        upvote_pitch = Upvote(user = current_user, pitch_id=id)
-        upvote_pitch.save_upvotes()
+        upvote_greymatter = Upvote(user = current_user, pitch_id=id)
+        upvote_greymatter.save_upvotes()
 
     
     @classmethod
     def get_upvotes(cls,id):
-        upvote = Upvote.query.filter_by(pitch_id=id).all()
+        upvote = Upvote.query.filter_by(greymatter_id=id).all()
         return upvote
 
     @classmethod
@@ -127,7 +127,7 @@ class Downvote(db.Model):
 
     id = db.Column(db.Integer,primary_key=True)
     downvote = db.Column(db.Integer,default=1)
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    greymatter_id = db.Column(db.Integer,db.ForeignKey('greymatters.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
     def save_downvotes(self):
@@ -136,8 +136,8 @@ class Downvote(db.Model):
 
 
     def add_downvotes(cls,id):
-        downvote_pitch = Downvote(user = current_user, pitch_id=id)
-        downvote_pitch.save_downvotes()
+        downvote_greymatter = Downvote(user = current_user, pitch_id=id)
+        downvote_greymatter.save_downvotes()
 
     
     @classmethod
