@@ -64,15 +64,15 @@ class Greymatter(db.Model):
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
-
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     
     @classmethod
     def get_greymatters(cls, id):
-        greymatters = Pitch.query.order_by(pitch_id=id).desc().all()
-        return pitches
+        greymatters = Greymatter.query.order_by(greymatter_id=id).desc().all()
+        return greymatters
 
     def __repr__(self):
-        return f'Pitch {self.description}'
+        return f'Greymatter {self.description}'
 
     
 
