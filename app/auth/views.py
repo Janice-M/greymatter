@@ -16,9 +16,9 @@ def login():
             login_user(user,login_form.remember.data)
             return redirect(request.args.get('next') or url_for('main.index'))
 
-        flash('Invalid username or Password')
+        flash('Rafiki this is an Invalid username or Password')
 
-    title = "Pitchers Tarvern Login"
+    title = "Grey Matter LOgin"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
 
@@ -31,10 +31,11 @@ def register():
         user = User(email = form.email.data, username = form.username.data,password = form.password.data)
         db.session.add(user)
         db.session.commit()
-        mail_message("Rafiki welcome to Pitcher Tarvern","email/welcome_user",user.email,user=user)
+        
+        mail_message("Rafiki welcome to Greymatter","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
-        title = "New Pitcher in the Tarvern"
+        title = "Welcome to Grey Matter"
     return render_template('auth/register.html',registration_form = form)
 
 
