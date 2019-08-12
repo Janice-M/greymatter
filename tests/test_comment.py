@@ -1,8 +1,8 @@
 import unittest
-from app.models import Pitch, User, Comment
+from app.models import Greymatter, User, Comment
 from app import db
 
-class TestPitch(unittest.TestCase):
+class TestGreymatter(unittest.TestCase):
 
     def setUp(self):
         self.new_grematter = Greymatter(greymatter_content = "blog post",)
@@ -19,4 +19,4 @@ class TestPitch(unittest.TestCase):
 
     def test_check_instance_variables(self):
         self.assertEquals(self.new_comment.comment_content,"comment")
-        self.assertEquals(self.new_comment.pitch,self.new_pitch, 'pitcher')
+        self.assertEquals(self.new_comment.pitch,self.new_greyworm, 'blogpost')
