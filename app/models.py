@@ -61,9 +61,9 @@ class Greymatter(db.Model):
     # downvotes = db.Column(db.Integer, default=int(0))
     # upvotes = db.Column(db.Integer, default=int(0))
     #category = db.Column(db.String(255), nullable=False)
-    comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
-    upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
-    downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
+    comments = db.relationship('Comment',backref='greymatter',lazy='dynamic')
+    upvotes = db.relationship('Upvote', backref = 'greymatter', lazy = 'dynamic')
+    downvotes = db.relationship('Downvote', backref = 'greymatter', lazy = 'dynamic')
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     
     @classmethod
