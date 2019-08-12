@@ -118,7 +118,7 @@ class Upvote(db.Model):
         return upvotes
 
     def __repr__(self):
-        return f'{self.user_id}:{self.pitch_id}'
+        return f'{self.user_id}:{self.greymatter_id}'
 
 
 
@@ -136,23 +136,23 @@ class Downvote(db.Model):
 
 
     def add_downvotes(cls,id):
-        downvote_greymatter = Downvote(user = current_user, pitch_id=id)
+        downvote_greymatter = Downvote(user = current_user, greymatter_id=id)
         downvote_greymatter.save_downvotes()
 
     
     @classmethod
     
     def get_downvotes(cls,id):
-        downvote = Downvote.query.filter_by(pitch_id=id).all()
+        downvote = Downvote.query.filter_by(greymatter_id=id).all()
         return downvote
 
     @classmethod
     
-    def get_all_downvotes(cls,pitch_id):
+    def get_all_downvotes(cls,greymatter_id):
         downvote = Downvote.query.order_by('id').all()
         return downvote
 
     def __repr__(self):
-        return f'{self.user_id}:{self.pitch_id}'
+        return f'{self.user_id}:{self.greymatter_id}'
 
 
