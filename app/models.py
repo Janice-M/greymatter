@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
     pass_secure = db.Column(db.String(255))
-    pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
+    greymatter = db.relationship('Pitch', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
@@ -38,12 +38,21 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'{self.username}'
 
+    class Role(db.Model):
 
+        __tablename__='roles'
+    
+        id=db.Column(db.Integer, primary_key=True)
+        name=db.Column(db.String(255), unique=True)
+        default = db.Column(db.Boolean, default=False, index=True)
+        permissions = db.Column(db.Integer)
+        users = db.relationship('User', backref='role', lazy='dynamic')
+    
 
-class Pitch(db.Model):
+class Greymatter(db.Model):
     '''
     '''
-    __tablename__ = 'pitches'
+    __tablename__ = 'greymatters'
 
     id = db.Column(db.Integer, primary_key = True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
@@ -51,15 +60,15 @@ class Pitch(db.Model):
     title = db.Column(db.String())
     # downvotes = db.Column(db.Integer, default=int(0))
     # upvotes = db.Column(db.Integer, default=int(0))
-    category = db.Column(db.String(255), nullable=False)
+    #category = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
 
     
     @classmethod
-    def get_pitches(cls, id):
-        pitches = Pitch.query.order_by(pitch_id=id).desc().all()
+    def get_greymatters(cls, id):
+        greymatters = Pitch.query.order_by(pitch_id=id).desc().all()
         return pitches
 
     def __repr__(self):
