@@ -5,9 +5,9 @@ from wtforms import ValidationError
 
 
 
-class PitchForm(FlaskForm):
+class GreymatterForm(FlaskForm):
 	title = StringField('Title', validators=[Required()])
-	body = TextAreaField("Rafiki, what would you like to share?",validators=[Required()])
+	description = TextAreaField("Rafiki, what would you like to share?",validators=[Required()])
 	
 	submit = SubmitField('Submit:)')
 

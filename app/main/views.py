@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort, flash
 from . import main
 from flask_login import login_required, current_user
-from ..models import Pitch, User,Comment,Upvote,Downvote
-from .forms import PitchForm, CommentForm, UpvoteForm
+from ..models import Greymatter, User,Comment,Upvote,Downvote
+from .forms import GreymatterForm, CommentForm, UpvoteForm
 from flask.views import View,MethodView
 from .. import db 
 
@@ -14,35 +14,37 @@ def index():
     '''
     Root page functions that return the home page and its data
     '''
-    pitch = Pitch.query.filter_by().first()
-    title = 'Welcome Home Rafiki'
-    alineforyourcrush = Pitch.query.filter_by(category="alineforyourcrush")
-    interviewpitch = Pitch.query.filter_by(category = "interviewpitch")
-    promotionpitch = Pitch.query.filter_by(category = "promotionpitch")
-    businesspitch = Pitch.query.filter_by(category = "businesspitch")
-
+    
+    title = 'Welcome To Greymatter Rafiki'
+    
+    form = GreymatterForm()
+    
     upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
     
+    if form.validate_on_submit():
+        post = Greymatter(body=form.body.data, author=current_user._get_current_object())
+        post.save_post()
+        return redirect(url_for('.index'))
 
-    return render_template('home.html', title = title, pitch = pitch, alineforyourcrush=alineforyourcrush, interviewpitch= interviewpitch, promotionpitch = promotionpitch, businesspitch = businesspitch, upvotes=upvotes)
-    
+    posts = Greymatter.query.order_by(Greymatter.timestamp.desc()).all()
+
+    return render_template('home.html',upvotes=upvotes, form=form, posts=posts)
 
 
 
 
 @main.route('/pitches/new/', methods = ['GET','POST'])
 @login_required
-def new_pitch():
-    form = PitchForm()
-    my_upvotes = Upvote.query.filter_by(pitch_id = Pitch.id)
+def new_greymatter():
+    form = GreymatterForm()
+    my_upvotes = Upvote.query.filter_by(greymatter_id = Greymatter.id)
     if form.validate_on_submit():
         description = form.description.data
         title = form.title.data
         owner_id = current_user
-        category = form.category.data
         print(current_user._get_current_object().id)
-        new_pitch = Pitch(owner_id =current_user._get_current_object().id, title = title,description=description,category=category)
-        db.session.add(new_pitch)
+        new_greymatter = Greymatter(owner_id =current_user._get_current_object().id, title = title,
+        db.session.add(new_greymatter)
         db.session.commit()
         
         
@@ -51,39 +53,38 @@ def new_pitch():
 
 
 
-
 @main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
 @login_required
 def new_comment(pitch_id):
     form = CommentForm()
-    pitch=Pitch.query.get(pitch_id)
+    greymatter=greymatter.query.get(_id)
     if form.validate_on_submit():
         description = form.description.data
 
-        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, pitch_id = pitch_id)
+        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, greymatter_id = greymatter_id)
         db.session.add(new_comment)
         db.session.commit()
 
 
-        return redirect(url_for('.new_comment', pitch_id= pitch_id))
+        return redirect(url_for('.new_comment', greymatter_id= greymatter_id))
 
-    all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
-    return render_template('comments.html', form = form, comment = all_comments, pitch = pitch )
+    all_comments = Comment.query.filter_by(greymatter_id = greymatter_id).all()
+    return render_template('comments.html', form = form, comment = all_comments, greymatter = greymatter )
 
-    """ The above allows you to add a comment in all the categories of the different pitches"""
+    """ The above allows you to add a comment in blog posts at greymatter"""
 
-@main.route('/pitch/upvote/<int:pitch_id>/upvote', methods = ['GET', 'POST'])
+@main.route('/greymatter/upvote/<int:greymatter_id>/upvote', methods = ['GET', 'POST'])
 @login_required
-def upvote(pitch_id):
-    pitch = Pitch.query.get(pitch_id)
+def upvote(greymatter_id):
+    greymatter = Greymatter.query.get(greymatter_id)
     user = current_user
-    pitch_upvotes = Upvote.query.filter_by(pitch_id= pitch_id)
+    greymatter_upvotes = Upvote.query.filter_by(greymatter_id= greymatter_id)
     
-    if Upvote.query.filter(Upvote.user_id==user.id,Upvote.pitch_id==pitch_id).first():
+    if Upvote.query.filter(Upvote.user_id==user.id,Upvote.greymatter_id==greymatter_id).first():
         return  redirect(url_for('main.index'))
 
 
-    new_upvote = Upvote(pitch_id=pitch_id, user = current_user)
+    new_upvote = Upvote(greymatter_id=greymatter_id, user = current_user)
     new_upvote.save_upvotes()
     return redirect(url_for('main.index'))
 
@@ -91,18 +92,18 @@ def upvote(pitch_id):
 
 
 
-@main.route('/pitch/downvote/<int:pitch_id>/downvote', methods = ['GET', 'POST'])
+@main.route('/greymatter/downvote/<int:greymatter_id>/downvote', methods = ['GET', 'POST'])
 @login_required
-def downvote(pitch_id):
-    pitch = Pitch.query.get(pitch_id)
+def downvote(greymatter_id):
+    greymatter = Greymatter.query.get(greymatter_id)
     user = current_user
-    pitch_downvotes = Downvote.query.filter_by(pitch_id= pitch_id)
+    greymatter_downvotes = Downvote.query.filter_by(greymatter_id= greymatter_id)
     
-    if Downvote.query.filter(Downvote.user_id==user.id,Downvote.pitch_id==pitch_id).first():
+    if Downvote.query.filter(Downvote.user_id==user.id,Downvote.greymatter_id==greymatter_id).first():
         return  redirect(url_for('main.index'))
 
 
-    new_downvote = Downvote(pitch_id=pitch_id, user = current_user)
+    new_downvote = Downvote(greymatter_id=greymatter_id, user = current_user)
     new_downvote.save_downvotes()
     return redirect(url_for('main.index'))
 
