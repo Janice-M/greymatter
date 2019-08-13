@@ -107,7 +107,3 @@ def downvote(greymatter_id):
     new_downvote.save_downvotes()
     return redirect(url_for('main.index'))
 
-
-		
-   
-

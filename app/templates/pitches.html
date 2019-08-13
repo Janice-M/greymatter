@@ -11,13 +11,13 @@
 		<div class="jumbotron">
 				{{wtf.quick_form(form)}}
 		<ul style="list-style: none;">
-				{% for pitch in pitches %}
+				{% for greymatter in greymatters %}
 					<div class="list-group">
 						<a href="#">
 							<div class="list-item">
-								<p>{{pitch.id}}</p>
+								<p>{{greymatter.id}}</p>
 							</div>
-							<h4>{{ pitch.description }}</h4>
+							<h4>{{ greymatter.description }}</h4>
 							<h6> Posted by {{user.username}}.</h6>
 						</a>
 					</div>
