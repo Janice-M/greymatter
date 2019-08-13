@@ -1,9 +1,19 @@
 
 {% extends 'base.html'%} 
-{%blocksytles%}
+{%block styles%}
 {{ super() }}
 <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed&display=swap" rel="stylesheet">
+<style>
 
+    h3, h4 {
+        font-family: 'Oswald', sans-serif !important;
+    }
+    body {
+        font-family: 'Roboto Condensed', sans-serif !important;
+      text-align: center;
+
+    }
+</style>
 {%endblock%}
 {% block content %}
 

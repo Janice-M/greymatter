@@ -4,6 +4,7 @@ class Config:
     '''
     General configuration parent class
     '''
+    QUOTES_BASE_URL='http://quotes.stormconsultancy.co.uk/random.json'
     SECRET_KEY = os.environ.get("SECRET_KEY")
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
@@ -22,8 +23,8 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    
 
 class TestConfig(Config):
     '''

@@ -60,7 +60,7 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     # Setting config when using an API
-    # from .requests import configure_request
-    # configure_request(app)
+    from .request import configure_request
+    configure_request(app)
 
     return app

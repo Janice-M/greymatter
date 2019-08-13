@@ -5,7 +5,7 @@ from ..models import Greymatter, User,Comment,Upvote,Downvote
 from .forms import GreymatterForm, CommentForm, UpvoteForm
 from flask.views import View,MethodView
 from .. import db 
-
+from ..request import get_quotes
 
 
 @main.route('/', methods = ['GET','POST'])
@@ -28,8 +28,10 @@ def index():
     #     return redirect(url_for('.index'))
 
     greymatters = Greymatter.get_greymatters()
+    quote=get_quotes()
 
-    return render_template('home.html',upvotes=upvotes, greymatters =greymatters)
+
+    return render_template('home.html',upvotes=upvotes, quote= quote, greymatters =greymatters)
 
 
 
