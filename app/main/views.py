@@ -33,7 +33,7 @@ def index():
 
 
 
-@main.route('/pitches/new/', methods = ['GET','POST'])
+@main.route('/greymatters/new/', methods = ['GET','POST'])
 @login_required
 def new_greymatter():
     form = GreymatterForm()
@@ -53,9 +53,9 @@ def new_greymatter():
 
 
 
-@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
+@main.route('/comment/new/<int:greymatter_id>', methods = ['GET','POST'])
 @login_required
-def new_comment(pitch_id):
+def new_comment(greymatter_id):
     form = CommentForm()
     greymatter=greymatter.query.get(_id)
     if form.validate_on_submit():
