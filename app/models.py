@@ -145,3 +145,11 @@ class Downvote(db.Model):
         return f'{self.user_id}:{self.greymatter_id}'
 
 
+    class Quote():
+        '''
+        Quote Class to define qoute objects
+        '''
+        def __init__(self,id,author,quote):
+            self.id=id
+            self.author=author
+            self.quote=quote
