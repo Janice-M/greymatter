@@ -18,7 +18,7 @@ def login():
 
         flash('Rafiki this is an Invalid username or Password')
 
-    title = "Grey Matter LOgin"
+    title = "Grey Matter Login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
 

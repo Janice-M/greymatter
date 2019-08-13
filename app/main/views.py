@@ -19,16 +19,16 @@ def index():
     
     form = GreymatterForm()
     
-    upvotes = Upvote.get_all_upvotes(greymatter_id=Greymatter.id)
+    upvotes = Upvote.get_all_upvotes(greymatter_id = Greymatter.id)
     
     if form.validate_on_submit():
-        post = Greymatter(body=form.body.data, author=current_user._get_current_object())
+        post = Greymatter(description=form.description.data, author=current_user._get_current_object())
         post.save_post()
         return redirect(url_for('.index'))
 
-    posts = Greymatter.query.order_by(Greymatter.timestamp.desc()).all()
+    greymatters = Greymatter.query.order_by(Greymatter.timestamp.desc()).all()
 
-    return render_template('home.html',upvotes=upvotes, form=form, posts=posts)
+    return render_template('home.html',upvotes=upvotes, form=form, greymatters=greymatters)
 
 
 
@@ -43,7 +43,7 @@ def new_greymatter():
         title = form.title.data
         owner_id = current_user
         print(current_user._get_current_object().id)
-        new_greymatter = Greymatter(owner_id =current_user._get_current_object().id, title = title,
+        new_greymatter = Greymatter(owner_id =current_user._get_current_object().id, title = title)
         db.session.add(new_greymatter)
         db.session.commit()
         

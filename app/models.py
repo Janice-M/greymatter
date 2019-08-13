@@ -38,17 +38,6 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'{self.username}'
 
-    class Role(db.Model):
-
-        __tablename__='roles'
-    
-        id=db.Column(db.Integer, primary_key=True)
-        name=db.Column(db.String(255), unique=True)
-        default = db.Column(db.Boolean, default=False, index=True)
-        permissions = db.Column(db.Integer)
-        users = db.relationship('User', backref='role', lazy='dynamic')
-    
-
 class Greymatter(db.Model):
     '''
     '''
@@ -68,7 +57,7 @@ class Greymatter(db.Model):
     
     @classmethod
     def get_greymatters(cls, id):
-        greymatters = Greymatter.query.order_by(greymatter_id=id).desc().all()
+        greymatters = Greymatter.query.order_by(id=id).desc().all()
         return greymatters
 
     def __repr__(self):
