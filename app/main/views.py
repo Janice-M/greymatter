@@ -19,7 +19,7 @@ def index():
     
     form = GreymatterForm()
     
-    upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
+    upvotes = Upvote.get_all_upvotes(greymatter_id=Greymatter.id)
     
     if form.validate_on_submit():
         post = Greymatter(body=form.body.data, author=current_user._get_current_object())
