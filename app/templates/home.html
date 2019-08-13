@@ -19,7 +19,7 @@
           <div class="greymatter-date">{{ moment(greymatter.timestamp).fromNow() }}</div>
           <div class="greymatter-author">
             <a href="{{ url_for('.user', username=greymatter.author.username) }}">
-    {{ post.author.username }}
+    {{ greymatter.author.username }}
     </a>
           </div>
           <div class="greymatter-description">{{ greymatter.description }}</div>
