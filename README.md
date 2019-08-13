@@ -16,6 +16,11 @@ https://janice-greymatter.herokuapp.com/
 ## Description
   Grey matter is a blog application that allows you that allows a person to have a more interactive blogging experience and readers to remain at par with the blogs posted as they receive email notifications.
 
+
+ [!screenshot](images/screen1.png)
+
+  [!screenshot](images/screen2.png)
+
 ## Installation Requirements
   Clone this repository and navigate to the folder.
   Run the following commands to allow functionality of the app:-
