@@ -12,7 +12,7 @@ from flask_moment import Moment
 # Instance of LoginManger and using its methods
 
 #login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.login'
+login_manager = LoginManager()
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 simple = SimpleMDE()
@@ -43,7 +43,8 @@ def create_app(config_name):
     
     login_manager.init_app(app)
     mail.init_app(app)
-    moment.init_app(app)
+    moment.init_app(app
+                    )
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'auth.login'
     # Regestering the main blueprint
