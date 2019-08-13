@@ -15,8 +15,6 @@ class Config:
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:grey@localhost/greymatter'
 
 
-
-
 class ProdConfig(Config):
     '''
     Pruduction configuration child class
@@ -47,6 +45,5 @@ class DevConfig(Config):
 
 config_options = {
     'development': DevConfig,
-    
-    'test': TestConfig
-}
+    'production': ProdConfig
+    'test': TestConfig}
