@@ -56,8 +56,8 @@ class Greymatter(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     
     @classmethod
-    def get_greymatters(cls, id):
-        greymatters = Greymatter.query.order_by(id=id).desc().all()
+    def get_greymatters(cls):
+        greymatters = Greymatter.query.order_by(Greymatter.timestamp.desc()).all()
         return greymatters
 
     def __repr__(self):

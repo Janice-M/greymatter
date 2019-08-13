@@ -8,21 +8,21 @@
     <div class="container">
       <div class= "jumbotron " style="color:cadetblue">
       <h3 style="color:black;text-align: center">Greymatter blogposts</h3>
-      
+      <h4 style="color:black;text-align: center">Let us hear you out </h4>
       <div class="row">
         {% for greymatter in greymatters %}
         <li class="greymatter">
           <div class="profile-thumbnail">
-            <a href="{{ url_for('.user', username=greymatter.author.username) }}">
+          
     
           </div>
           <div class="greymatter-date">{{ moment(greymatter.timestamp).fromNow() }}</div>
-          <div class="greymatter-author">
-            <a href="{{ url_for('.user', username=greymatter.author.username) }}">
-    {{ greymatter.author.username }}
-    </a>
+          <div style="text-align: center" class="greymatter-author">
+          
+                 {{ greymatter.title}}
+  
           </div>
-          <div class="greymatter-description">{{ greymatter.description }}</div>
+          <div class="greymatter-description" style="text-align: center">{{ greymatter.description }}</div>
         </li>
         {% endfor %}
       </div>

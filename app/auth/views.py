@@ -32,8 +32,6 @@ def register():
         db.session.add(user)
         db.session.commit()
         
-        mail_message("Rafiki welcome to Greymatter","email/welcome_user",user.email,user=user)
-
         return redirect(url_for('auth.login'))
         title = "Welcome to Grey Matter"
     return render_template('auth/register.html',registration_form = form)

@@ -10,6 +10,7 @@ from .. import db
 
 @main.route('/', methods = ['GET','POST'])
 def index():
+    
 
     '''
     Root page functions that return the home page and its data
@@ -17,18 +18,18 @@ def index():
     
     title = 'Welcome To Greymatter Rafiki'
     
-    form = GreymatterForm()
+    # form = GreymatterForm()
     
     upvotes = Upvote.get_all_upvotes(greymatter_id = Greymatter.id)
     
-    if form.validate_on_submit():
-        post = Greymatter(description=form.description.data, author=current_user._get_current_object())
-        post.save_post()
-        return redirect(url_for('.index'))
+    # if form.validate_on_submit():
+    #     post = Greymatter(description=form.description.data, author=current_user._get_current_object())
+    #     post.save_post()
+    #     return redirect(url_for('.index'))
 
-    greymatters = Greymatter.query.order_by(Greymatter.timestamp.desc()).all()
+    greymatters = Greymatter.get_greymatters()
 
-    return render_template('home.html',upvotes=upvotes, form=form, greymatter =greymatters)
+    return render_template('home.html',upvotes=upvotes, greymatters =greymatters)
 
 
 
@@ -43,7 +44,7 @@ def new_greymatter():
         title = form.title.data
         owner_id = current_user
         print(current_user._get_current_object().id)
-        new_greymatter = Greymatter(owner_id =current_user._get_current_object().id, title = title)
+        new_greymatter = Greymatter(owner_id =current_user._get_current_object().id, description= description, title = title)
         db.session.add(new_greymatter)
         db.session.commit()
         
