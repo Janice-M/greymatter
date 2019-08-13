@@ -10,7 +10,7 @@
       <h3 style="color:black;text-align: center">Greymatter blogposts</h3>
       
       <div class="row">
-        {% for post in posts %}
+        {% for greymatter in greymatters %}
         <li class="greymatter">
           <div class="profile-thumbnail">
             <a href="{{ url_for('.user', username=greymatter.author.username) }}">

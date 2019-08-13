@@ -28,7 +28,7 @@ def index():
 
     greymatters = Greymatter.query.order_by(Greymatter.timestamp.desc()).all()
 
-    return render_template('home.html',upvotes=upvotes, form=form, greymatters=greymatters)
+    return render_template('home.html',upvotes=upvotes, form=form, greymatter =greymatters)
 
 
 
