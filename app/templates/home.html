@@ -7,37 +7,26 @@
   {% block content %}
     <div class="container">
       <div class= "jumbotron " style="color:cadetblue">
-      <h3 style="color:black;text-align: center">Pitch Tarvern Categories</h3>
-      <br>
-      <ul class="nav nav-pills nav-justified nav-fill" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#product">Business Pitches</a>
+      <h3 style="color:black;text-align: center">Greymatter blogposts</h3>
+      
+      <div class="row">
+        {% for post in posts %}
+        <li class="greymatter">
+          <div class="profile-thumbnail">
+            <a href="{{ url_for('.user', username=greymatter.author.username) }}">
+    
+          </div>
+          <div class="greymatter-date">{{ moment(greymatter.timestamp).fromNow() }}</div>
+          <div class="greymatter-author">
+            <a href="{{ url_for('.user', username=greymatter.author.username) }}">
+    {{ post.author.username }}
+    </a>
+          </div>
+          <div class="greymatter-description">{{ greymatter.description }}</div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#interview">Interview Pitches</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#pickupline">Lines for your crush</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#promotion">Promotion Pitches</a>
-        </li>
-      </ul>
-
-      <div class="tab-content">
-        <div id="product" class="container tab-pane active"><br>
-          {{ macro.display(businesspitch) }}
-          
-        </div>
-        <div id="interview" class="container tab-pane fade"><br>
-          {{ macro.display(interviewpitch) }}
-        </div>
-        <div id="pickupline" class="container tab-pane fade"><br>
-          {{ macro.display(alineforyourcrush)}}
-        </div>
-        <div id="promotion" class="container tab-pane fade"><br>
-          {{ macro.display(promotionpitch) }}
-        </div>
+        {% endfor %}
+      </div>
+      
         
       </div>
     </div>
