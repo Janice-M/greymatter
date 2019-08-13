@@ -1,4 +1,4 @@
-Hello Rafiki, {{user.username}}
-Welcome to Pitch Tarvern
-We have just seen you have signed up on our application and want to welcome you to the tarvern. Please post your best pitches and enjoy the pitches from the community.
+Hello Rafiki,
+Welcome to Grey Matter Rafiki, 
+We have just seen you have signed up on our application and want to welcome you to the Greymatter, we look forward to reading your posts. Please post your best blogs and enjoy the best blogs from the community.
 
